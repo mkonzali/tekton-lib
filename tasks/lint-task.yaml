@@ -24,7 +24,7 @@ spec:
         set -eu
         VENV="$(params.venv-path)"
         "$VENV/bin/pip" install --no-cache-dir pylint
-        # Exécute pylint et capture le code retour sans casser la task
+        # ExÃ©cute pylint et capture le code retour sans casser la task
         if "$VENV/bin/python" -m pylint .; then
           printf "%s" "passed" > "$(results.lint-status.path)"
           exit 0

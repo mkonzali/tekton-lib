@@ -14,9 +14,9 @@ spec:
       default: app
   results:
     - name: repo-dir
-      description: Répertoire où le repo a été cloné
+      description: RÃ©pertoire oÃ¹ le repo a Ã©tÃ© clonÃ©
     - name: commit-sha
-      description: SHA du commit cloné
+      description: SHA du commit clonÃ©
   workspaces:
     - name: source
   steps:

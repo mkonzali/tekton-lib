@@ -28,6 +28,6 @@ spec:
           printf "%s" "passed" > "$(results.test-status.path)"
         else
           printf "%s" "failed" > "$(results.test-status.path)"
-          # on n'échoue pas la task pour laisser le Pipeline utiliser 'when'
+          # on n'Ã©choue pas la task pour laisser le Pipeline utiliser 'when'
           exit 0
         fi

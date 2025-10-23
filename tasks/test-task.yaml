@@ -1,0 +1,33 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: run-pytests
+spec:
+  params:
+    - name: repo-dir
+      type: string
+      default: app
+    - name: venv-path
+      type: string
+      default: .venv
+  results:
+    - name: test-status
+      description: "passed ou failed"
+  workspaces:
+    - name: source
+  steps:
+    - name: pytest
+      image: python:3.12-slim
+      workingDir: $(workspaces.source.path)/$(params.repo-dir)
+      script: |
+        #!/usr/bin/env sh
+        set -eu
+        VENV="$(params.venv-path)"
+        "$VENV/bin/pip" install --no-cache-dir pytest
+        if "$VENV/bin/python" -m pytest -q; then
+          printf "%s" "passed" > "$(results.test-status.path)"
+        else
+          printf "%s" "failed" > "$(results.test-status.path)"
+          # on n'échoue pas la task pour laisser le Pipeline utiliser 'when'
+          exit 0
+        fi
